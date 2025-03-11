@@ -1,0 +1,80 @@
+% !TEX options=-synctex=-1
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+\usepackage{../TexTools/extensionAlgisColor}
+\usepackage{../TexTools/extensionCours}
+
+
+\title{Standard de développement}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Dans le domaine du développement logiciel, l'adoption de standards de codage est cruciale pour garantir la qualité, la lisibilité et la maintenabilité du code. Ces standards définissent un ensemble de règles et de conventions que les développeurs doivent suivre pour écrire un code cohérent et compréhensible. L'utilisation de standards permet de faciliter la collaboration entre les membres d'une équipe, de réduire les erreurs et d'améliorer l'efficacité du développement.
+
+Les standards de codage sont particulièrement importants dans les projets de grande envergure ou dans les environnements où plusieurs développeurs travaillent sur le même code. Ils aident à maintenir une base de code propre, cohérente, et bien organisée, ce qui est essentiel pour le succès à long terme d'un projet.
+
+\warningbox{À la veille de chaque séance de cours, vous aurez une note sur la « propreté » du code. Cette note sera notamment déterminée à partir des retours de flake8 (cf. ci-dessous) afin de m'assurer que votre code vérifie bien PEP 8. Dans le cas contraire cette note diminuera.}
+
+\section{Conventions PEP 8}
+
+Pour ce projet, nous allons suivre les conventions de codage définies dans le \href{https://peps.python.org/pep-0008/}{PEP 8}, qui est l'un des principaux standard pour le code Python. Voici quelques exemples de ces conventions :
+
+\begin{itemize} 
+  \item \textbf{Indentation} : Utilisez 4 espaces par niveau d'indentation.
+  \item \textbf{Longueur des lignes} : Limitez la longueur des lignes à 79 caractères.
+  \item \textbf{Espaces} : Utilisez des espaces autour des opérateurs et après les virgules, mais pas directement à l'intérieur des parenthèses, crochets ou accolades.
+  \item \textbf{Imports} : Les imports doivent être placés en haut du fichier.
+  \item \textbf{Nommage} : Utiliser des noms explicites pour les variables, fonctions et classes. Par exemple, utilisez \texttt{lower\_case\_with\_underscores} pour les noms de fonctions et de variables, et \texttt{CamelCase} pour les noms de classes.
+\end{itemize}
+
+\section{Application des Conventions avec Flake8}
+
+S'assurer manuellement, que toutes les dizaines de conventions PEP 8 sont vérifiés parait impossible.  
+Pour s'assurer que votre code respecte les conventions PEP 8, je vous propose d'utiliser l'outil \texttt{Flake8}. Celui-ci vérifie la conformité du code avec les conventions de style, détecter les erreurs de programmation et évaluer la complexité du code.
+
+Pour installer Flake8, utilisez la commande suivante dans votre environnement Python :
+
+\begin{lstlisting}[language=bash]
+pip install flake8, flake8-docstrings
+\end{lstlisting}
+
+Pour vérifier un script Python avec Flake8, exécutez la commande suivante dans votre terminal :
+
+\begin{lstlisting}[language=bash]
+flake8 nom_du_script.py
+\end{lstlisting}
+
+Flake8 analysera le script et affichera une liste d'avertissements et d'erreurs, le cas échéant.
+
+\tipbox{Je vous recommande d'intégrer Flake8 dans sublime text avec les packages \texttt{SublimeLinter} et \texttt{SublimeLinter-flake8}.}
+
+Vous pouvez configurer Flake8 pour ignorer certaines règles ou pour ajuster les paramètres par défaut en créant un fichier de configuration \texttt{.flake8} à la racine de votre projet. Voici un exemple de configuration :
+
+\begin{lstlisting}
+[flake8]
+max-line-length = 79
+extend-select = B950
+extend-ignore = E203,E501,E701
+\end{lstlisting}
+
+
+
+\end{document}

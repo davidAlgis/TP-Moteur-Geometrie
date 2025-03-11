@@ -1,0 +1,166 @@
+% !TEX options=-synctex=-1
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\usepackage{../TexTools/extensionAlgisColor}
+\usepackage{../TexTools/extensionCours}
+
+
+\title{TP0 - Mise en place}
+\author{David Algis}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\sectionExercice{L’environnement de développement}
+
+Tout d'abord, on va commencer par installer et configurer les différents logiciels qu'on utilisera aux cours du semestre
+
+\subsection{Installation}
+
+\begin{enumerate}
+    \item Installez Git pour le versionnage : \href{https://git-scm.com/downloads}{Git Downloads} (Windows, macOS, Linux)
+    \item Pour s'occuper du dépôt Git, je conseille d'utiliser \href{https://www.sublimemerge.com/}{Sublime Merge}, mais c'est à votre convenance si vous préférez utiliser les lignes de commandes ou un autre logiciel.
+    \item Installez \href{https://www.sublimetext.com/}{Sublime Text} pour l'IDE. 
+    \item Installez \href{https://www.python.org/downloads/}{Python} pour le code. Assurez-vous lors de son installation de bien l'ajouter au \texttt{\$PATH}.
+    \item Choisir un nom de projet et un nom de moteur. 
+    \item Définissez un chef d'équipe. Celui-ci va créer les git sur \href{https://github.com/}{Github}. 
+\end{enumerate}
+
+\subsection{Mise en place du git (pour le chef d'équipe)}
+
+Le chef d'équipe doit mettre en place cette structure
+\begin{lstlisting}[language=json]
+nom_projet/
+|--- rapports-USSI6V/
+|--- nom_moteur_librairie/
+|--- nom_moteur_executables/
+\end{lstlisting}
+
+Pour ça il doit créer les répertoires git suivant en public : 
+\begin{enumerate}
+    \item \texttt{nom\_projet} 
+    \item \texttt{rapports\_USSI6V}
+    \item \texttt{nom\_moteur\_librairie}
+    \item \texttt{nom\_moteur\_executables}
+\end{enumerate}
+
+Pour le répertoire \texttt{nom\_projet} doit uniquement contenir les trois autres répertoires comme des sous modules, pour ça vous pouvez utiliser la commande \href{https://git-scm.com/book/en/v2/Git-Tools-Submodules}{git submodule add}.
+
+Je vous recommande de créer un fichier \texttt{.gitignore} pour chaque répertoire, celui-ci définit ce qui ne doit pas être poussé sur le serveur.  
+
+\warningbox{Avant de versionner et d'envoyer un fichier sur le serveur git, assurez-vous bien que le fichier \textbf{est nécessaire à la bonne utilisation du projet}. Par exemple, il ne faut jamais versionner un fichier temporaire ou un fichier qui peut être généré automatiquement à partir du reste du code.}
+
+\subsection{Mise en place Sublime Text}
+
+\subsubsection{Installation des packages}
+
+\tipbox{Toute la configuration personnelle de Sublime Text est accessible en cliquant sur \texttt{Preferences/Browse Packages...}. Aussi, une seule personne de l'équipe peut faire cette mise en place et uniquement partager ce dossier aux autres membres de son équipe à la fin.}
+
+Sans package, sublime text est à peine mieux qu'un bloc note. Afin de pouvoir profiter de sa richesse, je vous invite dans un premier temps à installer le \texttt{Package Control}, c'est un gestionnaire de package qui simplifie l'installation des packages, pour ça il suffit de faire:
+
+\begin{enumerate}
+    \item Ouvrir la palette de commandes : Win/Linux : \texttt{ctrl+shift+p}, Mac : \texttt{cmd+shift+p}
+    \item Tapez \texttt{Install Package Control}, appuyez sur entrée
+    \item Ensuite pour installer un package il faut rouvrir la palette de commandes.
+    \item Tapez \texttt{Install Package}, appuyez sur entrée
+    \item Tapez le nom du package que vous souhaitez puis re-appuyer sur entrée pour l'installer.
+    \item Voilà.
+\end{enumerate}    
+
+
+Ensuite, je vous conseille fortement d'installer au moins les packages suivants :
+\begin{itemize}
+    \item \texttt{LSP} ou \textbf{L}anguage \textbf{S}erver \textbf{P}rotocol. C'est une spécification qui permet de communiquer entre un IDE et des outils pour faciliter le développement de chaque langage.
+    \item \texttt{LSP-pylsp} c'est le serveur LSP pour python. 
+\end{itemize}
+
+
+\tipbox{Je recommande fortement à l'un d'entre vous d'aller lire rapidement la documentation de \href{https://lsp.sublimetext.io/language_servers/}{LSP}, mais surtout le \textit{readme} de \href{https://github.com/sublimelsp/LSP-pylsp}{pylsp} afin de configurer vos serveurs. En effet, vous pouvez les configurez dans \texttt{Preferences/Packages Settings/LSP/Servers/LSP-pylsp} en appliquant du reformatage automatique ce qui vous sera \textbf{extrêmement utile} pour la suite du semestre.}   
+
+\subsubsection{Packages facultatifs}
+
+Vous pouvez aussi, pour votre confort, installer les packages suivants :
+\begin{itemize}
+    \item \texttt{SublimeLinter} permet de mettre en surbrillance dans l'éditeur des parties du code erronées ou problématique.
+    \item \texttt{SublimeLinter-flake8} Un ajout à \texttt{SublimeLinter} spécifique pour le python.
+    \item \texttt{Terminus} ça installe un terminal dans sublime text qui peut être utilisé pour lancer les \textit{build} python et qui peut être configuré et plus beau.
+    \item \texttt{A File Icon} ça permet d'avoir les icônes des différents fichiers en mode projet.
+    \item \texttt{TOML} ça permet d'avoir de la coloration syntaxique pour les fichiers \texttt{.toml}.
+\end{itemize}
+
+\tipbox{Je vous invite à regarder \href{https://docs.sublimetext.info/index.html}{la documentation non officielle de Sublime text} si vous voulez plus de détail sur le fonctionnement et l'utilisation de celui-ci.}
+
+\subsubsection{Configuration projet}
+
+Maintenant, que vous avez installé les packages, il faut configurer le projet pour sublime text, pour ça je vous invite à créer un nouveau \texttt{sublime-project} en appuyant sur \texttt{Project/Save Project As...} puis sauvegarder le dans \texttt{nom\_projet} ensuite pour le lier à ce dossier vous devez cliquer sur \texttt{Project/Add Folder To Project...}.
+
+Le \texttt{sublime-project} en plus de nous donner une vision globale du projet nous permet de donner des paramètres sublime text propre au projet. Par exemple, si on a tout un système de tests qui est propre à un projet de RTS qu'on développe, on voudrait que celui-ci ne pollue pas tout nos autres projets sublime text.    
+
+\tipbox{Un projet sublime contient un fichier \texttt{sublime-project} qui doit contenir les paramètres et les systèmes de construction propre à votre projet et un fichier \texttt{sublime-workspace} qui contient des informations sur l'état de l'espace de travail du projet, y compris les fichiers ouverts, les configurations de projet, et les paramètres d'affichage pour Sublime Text. Ce dernier est typiquement l'exemple type d'un fichier qui est propre à chaque utilisateur et qui ne doit pas être versionné.}
+
+\sectionExercice{Hello world}
+
+\begin{enumerate}
+     \item Créer un fichier \texttt{tp\_0\_env.py} qui affiche « \textit{Hello World} » quand on l’exécute.
+     \item Créer un système de construction pour pouvoir lancer automatiquement \texttt{tp\_0\_env.py} depuis n'importe quelle endroit dans sublime text et éviter de passer par le terminal. Pour ça vous pouvez vous inspirez de l'exemple de fichier \texttt{sublime-project} de l'appendice \ref{sec:fichier_sublime_project}.
+     \item Appuyez sur \texttt{Ctrl + Shift + B} puis appuyez sur entrée à la ligne ayant le nom de votre système de build.
+     \item Si ça affiche \texttt{Hello World} vous avez réussi. Bravo !
+ \end{enumerate} 
+
+
+\newpage
+\appendix
+
+\section{Fichier sublime project}
+\label{sec:fichier_sublime_project}
+Voici un exemple de fichier \texttt{sublime-project} :
+\begin{lstlisting}[language=json]
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "build_systems": [
+        {
+            // nom de votre systeme de build
+            "name": "Nom de votre build",
+            // si vous avez ajouter le plugin terminus vous pouvez utiliser cette extension
+            "target": "terminus_exec",
+            // pour imposer a sublime text de mettre le focus sur la sortie console 
+            "focus": true,
+            // Pour permettre a sublime text d'identifier les lignes avec des erreurs
+            "file_regex": "^([^:]+):([0-9]+):([0-9]+)?.*$",
+            // Definie la commande d'annulation quand on fait ctrl+c
+            "cancel": "terminus_cancel_build",
+            // On distingue linux et windows 
+            // en general sur linux python utilise python3 et python pour window
+            "linux": {
+                // on lance le tp_0_env.py
+                "shell_cmd": "python3 \"${project_path:${folder}}/nom_projet/tp_0_env.py\""
+            },
+            "windows": {
+                // on lance le tp_0_env.py
+                "shell_cmd": "python \"${project_path:${folder}}/nom_projet/tp_0_env.py\""
+            },
+            "working_dir": "${project_path:${folder}}/nom_projet",
+        },
+    ]
+}
+\end{lstlisting}
+
+\end{document}
