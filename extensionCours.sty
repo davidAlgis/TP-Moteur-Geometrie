@@ -1,0 +1,108 @@
+
+% new command \makeonlytitle to only show title and not author, date...
+\makeatletter
+\newcommand{\makeonlytitle}{
+  \begin{center}
+    {\LARGE \@title \par}
+  \end{center}
+}
+\makeatother
+
+\usepackage{xcolor}
+
+%color
+\definecolor{cornflower}{rgb}{0.55,0.79,0.90} % old bleuC
+\definecolor{blueGreen}{rgb}{0.12,0.61,0.73} % old bleuF
+\definecolor{oxfordBlue}{rgb}{0,0.18,0.27} % old noirC
+\definecolor{tiffanyBlue}{rgb}{0,0.77,0.69}
+\definecolor{uclaGold}{rgb}{1,0.71,0} % old jauneC
+\definecolor{orange}{rgb}{1,0.52,0} % old orangeF
+\definecolor{sunny}{rgb}{0.97,0.96,0.44}
+\definecolor{deepSpaceSparkle}{rgb}{0.30, 0.37, 0.42}
+\definecolor{gainsboro}{rgb}{0.86,0.86,0.86} % old greyGainsboro
+\definecolor{whiteLavender}{rgb}{0.90,0.90,0.98} % old whiteLavender
+\definecolor{heliotropeMagenta}{rgb}{0.69,0.09,0.78} % old purpleF
+\definecolor{shockingPink}{rgb}{1.0,0.41,0.92} % old pinkCrayola
+\definecolor{jellyBean}{rgb}{0.85,0.31,0.29} % old redF
+\definecolor{bittersweet}{rgb}{1.0,0.43,0.34} %old redC
+\definecolor{temptress}{rgb}{0.24,0.12,0.19}
+\definecolor{shadow}{rgb}{0.54,0.44,0.33}
+\definecolor{teaGreen}{rgb}{0.85,0.94,0.7} % old greenC
+\definecolor{apple}{rgb}{0.41,0.71,0.27} % old greenF
+\definecolor{fernGreen}{rgb}{0.35,0.47,0.28}
+
+% hyper reference
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blueGreen,
+    citecolor=blueGreen,
+    filecolor=magenta,      
+    urlcolor=blueGreen,
+    pdftitle={InteropUnityCUDA: A Tool for Interoperability between Unity and CUDA},
+    pdfpagemode=FullScreen,
+}
+
+
+% listing for python
+\usepackage{listings}
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blueGreen},
+    commentstyle=\color{gainsboro},
+    stringstyle=\color{apple},
+    numbers=left,
+    numberstyle=\tiny\color{deepSpaceSparkle},
+    stepnumber=1,
+    numbersep=5pt,
+    frame=single,
+    breaklines=true,
+    breakatwhitespace=false,
+    tabsize=4
+}
+
+
+% Define JSON language
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    numberstyle=\tiny\color{deepSpaceSparkle},
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{whiteLavender},
+    literate=
+     *{0}{{{\color{heliotropeMagenta}0}}}{1}
+      {1}{{{\color{heliotropeMagenta}1}}}{1}
+      {2}{{{\color{heliotropeMagenta}2}}}{1}
+      {3}{{{\color{heliotropeMagenta}3}}}{1}
+      {4}{{{\color{heliotropeMagenta}4}}}{1}
+      {5}{{{\color{heliotropeMagenta}5}}}{1}
+      {6}{{{\color{heliotropeMagenta}6}}}{1}
+      {7}{{{\color{heliotropeMagenta}7}}}{1}
+      {8}{{{\color{heliotropeMagenta}8}}}{1}
+      {9}{{{\color{heliotropeMagenta}9}}}{1}
+      {:}{{{\color{jellyBean}{:}}}}{1}
+      {,}{{{\color{jellyBean}{,}}}}{1}
+      {\{}{{{\color{blueGreen}{\{}}}}{1}
+      {\}}{{{\color{blueGreen}{\}}}}}{1}
+      {[}{{{\color{blueGreen}{[}}}}{1}
+      {]}{{{\color{blueGreen}{]}}}}{1},
+    morecomment=[l]{//}, % Define // as line comment
+    commentstyle=\color{apple}, % Set comment color to apple
+}
+
+% Usage example
+\lstset{language=json}
+% Custom section for exercice
+\newcommand{\sectionExercice}[1]{
+  \refstepcounter{section}
+  \section*{Exercice \thesection\ -- #1}
+}
+
+\usepackage{awesomebox}
+

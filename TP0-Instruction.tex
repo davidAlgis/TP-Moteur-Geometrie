@@ -3,7 +3,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
-\usepackage{xcolor}
 \usepackage{geometry}
 
 \geometry{
@@ -13,17 +12,16 @@
   top=20mm,
 }
 
-\usepackage{../TexTools/extensionAlgisColor}
-\usepackage{../TexTools/extensionCours}
+\usepackage{extensionCours}
 
 
 \title{TP0 - Mise en place}
-\author{David Algis}
-\date{\today}
+\author{}
+\date{}
 
 \begin{document}
 
-\maketitle
+\makeonlytitle
 
 \sectionExercice{L’environnement de développement}
 
@@ -115,8 +113,8 @@ Le \texttt{sublime-project} en plus de nous donner une vision globale du projet 
 \sectionExercice{Hello world}
 
 \begin{enumerate}
-     \item Créer un fichier \texttt{tp\_0\_env.py} qui affiche « \textit{Hello World} » quand on l’exécute.
-     \item Créer un système de construction pour pouvoir lancer automatiquement \texttt{tp\_0\_env.py} depuis n'importe quelle endroit dans sublime text et éviter de passer par le terminal. Pour ça vous pouvez vous inspirez de l'exemple de fichier \texttt{sublime-project} de l'appendice \ref{sec:fichier_sublime_project}.
+     \item Créer un fichier \texttt{tp\_0\_ins.py} qui affiche « \textit{Hello World} » quand on l’exécute.
+     \item Créer un système de construction pour pouvoir lancer automatiquement \texttt{tp\_0\_ins.py} depuis n'importe quelle endroit dans sublime text et éviter de passer par le terminal. Pour ça vous pouvez vous inspirez de l'exemple de fichier \texttt{sublime-project} de l'appendice \ref{sec:fichier_sublime_project}.
      \item Appuyez sur \texttt{Ctrl + Shift + B} puis appuyez sur entrée à la ligne ayant le nom de votre système de build.
      \item Si ça affiche \texttt{Hello World} vous avez réussi. Bravo !
  \end{enumerate} 
@@ -127,6 +125,7 @@ Le \texttt{sublime-project} en plus de nous donner une vision globale du projet 
 
 \section{Fichier sublime project}
 \label{sec:fichier_sublime_project}
+
 Voici un exemple de fichier \texttt{sublime-project} :
 \begin{lstlisting}[language=json]
 {
