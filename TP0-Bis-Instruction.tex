@@ -1,0 +1,71 @@
+% !TEX options=-synctex=-1
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\usepackage{extensionCours}
+
+\title{TP0 Bis - Mise en place}
+\author{}
+\date{}
+
+\begin{document}
+
+\makeonlytitle
+
+\sectionExercice{Installation et environnement de développement \LaTeX}
+
+Pour rédiger vos documents en \LaTeX{} sous Windows, il est recommandé d'installer une distribution complète telle que \TeX Live. Suivez les étapes ci-dessous :
+
+\subsection{Téléchargement et installation}
+\begin{enumerate}
+    \item Téléchargez l'installateur de \TeX Live : \href{https://tug.org/texlive/windows.html}{\TeX Live}.
+    \item Exécutez l'installateur et suivez les instructions à l'écran.
+\end{enumerate}
+
+\subsection{Installation des packages pour Sublime Text}
+Pour faciliter la rédaction de vos documents \LaTeX{} avec Sublime Text, installez les packages suivants :
+\begin{enumerate}
+    \item Ouvrez la palette de commandes (Ctrl+Shift+P sur Windows).
+    \item Tapez \texttt{Package Control: Install Package} et validez.
+    \item Recherchez et installez \texttt{LaTeXTools} : ce package offre des outils de compilation, de visualisation et d'autocomplétion pour \LaTeX.
+    \item Recherchez et installez \texttt{LaTeX-cwl} qui fournit des complétions de commandes \LaTeX.
+\end{enumerate}
+
+\sectionExercice{Bonjour Monde en \LaTeX}
+
+Dans cet exercice, vous allez créer et compiler un document simple qui affiche « Bonjour Monde ! ». Suivez les étapes ci-dessous :
+\begin{enumerate}
+    \item Créez un nouveau fichier nommé \texttt{bonjour.tex} à mettre dans le dossier TP0.
+    \item Copiez-collez le contenu suivant dans le fichier :
+    \begin{lstlisting}[language=TeX]
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\title{Bonjour Monde}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Bonjour Monde !
+
+\end{document}
+    \end{lstlisting}
+    \item Enregistrez le fichier.
+    \item Compilez le document en utilisant \texttt{LaTeXTools} (par exemple via la commande \texttt{Ctrl+B} ou en sélectionnant le build system LaTeX dans le menu \texttt{Tools > Build System}).
+    \item Vérifiez que le PDF généré affiche correctement le texte « Bonjour Monde ! ».
+\end{enumerate}
+
+\end{document}
