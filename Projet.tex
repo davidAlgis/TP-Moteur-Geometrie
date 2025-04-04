@@ -1,0 +1,127 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\usepackage{../TexTools/extensionAlgisColor}
+% contient lstlisting en python
+\usepackage{../TexTools/extensionCours}
+
+\title{Guide des bonnes pratiques pour projet en python}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Architecture}
+
+L'organisation d'un projet Python est une étape clé pour garantir sa maintenabilité et son évolutivité. 
+Voici quelques recommandations pour structurer vos projets :
+
+\begin{itemize}
+    \item \textbf{Organisation simple des dossiers} : Évitez de multiplier les sous-dossiers inutiles. Une organisation claire avec un dossier principal pour le code source et un autre pour les tests permet de garder une structure lisible.
+    \item \textbf{Séparation des responsabilités} : Regroupez les fichiers et modules par fonctionnalités. Par exemple, placez les fonctions de manipulation de données dans un module distinct de celui gérant l'interface utilisateur.
+    \item \textbf{Nomination cohérente} : Utilisez des noms explicites pour vos fichiers et dossiers. Les noms en minuscules et séparés par des underscores (ex : \texttt{mon\_module.py}) sont une bonne pratique en Python.
+\end{itemize}
+
+\section{Notion de module en Python}
+
+En Python, un \emph{module} est simplement un fichier contenant du code Python (fonctions, classes, variables, etc.) que l'on peut importer dans d'autres scripts. 
+
+\begin{itemize}
+    \item Pour transformer un dossier en module ou package, il suffit de placer un fichier nommé \texttt{\_\_init\_\_.py} dans ce dossier. Ce fichier peut être vide, mais il indique à Python que le dossier doit être traité comme un package.
+    \item L'utilisation de modules permet de séparer le code en parties logiques et réutilisables. Par exemple, vous pouvez avoir un module pour la gestion des entrées/sorties, un autre pour les calculs, et ainsi de suite.
+    \item Lors de l'importation, il est recommandé d'utiliser une syntaxe claire comme \texttt{from monpackage import monmodule} ou \texttt{import monpackage.monmodule as mm} pour faciliter la lisibilité et la maintenance du code.
+\end{itemize}
+
+Cette approche modulaire rend votre projet plus structuré et facilite les tests unitaires ainsi que la collaboration en équipe.
+\section{pyproject.toml}
+
+Utilisez le fichier \texttt{pyproject.toml} pour centraliser la configuration de vos outils. Configurez-le de la manière suivante :
+
+\begin{itemize}
+    \item \textbf{Gérez les dépendances} : Listez les packages requis et leurs versions pour éviter les conflits.
+    \item \textbf{Configurez les outils complémentaires} : Intégrez les configurations pour des outils comme\texttt{flake8} (linter) afin de standardiser votre code.
+\end{itemize}
+
+\textbf{Exemple de \texttt{pyproject.toml}} :
+
+\begin{lstlisting}
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "Mon Incroyable Nom de Projet"
+version = "0.0.0"
+description = "Ma Chouette Description"
+authors = [
+    { name = "Mon Magnifique Nom", email = "ma-super@addresse.fr" }
+]
+
+[tool.flake8]
+max-line-length = 79
+exclude = ["tests/*"]
+
+# Dépendances externes autorisées dans le projet.
+[tool.project]
+dependencies = [
+    "pygame>=2.0.0",
+]
+\end{lstlisting}
+
+En adoptant cette configuration, vous centralisez vos réglages et facilitez la collaboration sur votre projet.
+
+
+\section{Dépendances externes}
+
+% Explique qu'un utilisateur doit pouvoir installer les modules externes facilement avec le pyproject donne la commande
+% Explique qu'une bonne pratique est d'utiliser le virtual environnement pour s'assurer que tout fonctionne correctement en dehors de son environement
+
+\section{Readme}
+
+% Expliquer l'importances du readme et le fait qu'il doit détailler une installation et une utilisation exhaustive du projet
+
+\section{Tests unitaires}
+
+Intégrez des tests unitaires dès le début pour valider le fonctionnement de chaque composant de votre code. Suivez ces instructions :
+
+\begin{itemize}
+    \item \textbf{Utilisez \texttt{pytest}} : Installez et configurez \texttt{pytest} pour lancer vos tests facilement.
+    \item \textbf{Structurez vos tests} : Placez-les dans un dossier \texttt{tests/} et nommez vos fichiers avec le préfixe \texttt{test\_}.
+    \item \textbf{Écrivez des tests pour chaque fonction critique} : Couvrez les cas normaux, les erreurs potentielles et les cas limites.
+\end{itemize}
+
+\textbf{Exemple de test avec \texttt{pytest}} :
+
+\begin{lstlisting}[language=python]
+def addition(a, b):
+    return a + b
+
+def test_addition():
+    # Cas normal
+    assert addition(2, 3) == 5
+    # Cas avec zero
+    assert addition(0, 0) == 0
+    # Cas negatif
+    assert addition(-1, 1) == 0
+\end{lstlisting}
+
+\textbf{Automatisez l'exécution} : Intégrez \texttt{pytest} dans votre pipeline d'intégration continue (CI) pour lancer les tests à chaque commit et garantir la stabilité du code.
+
+En appliquant ces directives, vous assurerez la qualité et la robustesse de vos projets Python.
+
+\end{document}
