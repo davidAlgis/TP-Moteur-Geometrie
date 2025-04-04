@@ -76,7 +76,7 @@ authors = [
 max-line-length = 79
 exclude = ["tests/*"]
 
-# Dépendances externes autorisées dans le projet.
+# Dependances externes autorisees dans le projet.
 [tool.project]
 dependencies = [
     "pygame>=2.0.0",
@@ -88,12 +88,30 @@ En adoptant cette configuration, vous centralisez vos réglages et facilitez la 
 
 \section{Dépendances externes}
 
-% Explique qu'un utilisateur doit pouvoir installer les modules externes facilement avec le pyproject donne la commande
-% Explique qu'une bonne pratique est d'utiliser le virtual environnement pour s'assurer que tout fonctionne correctement en dehors de son environement
+Pour que l'installation des dépendances externes soit simple et reproductible, suivez ces recommandations :
+
+\begin{itemize}
+    \item \textbf{Utilisez un environnement virtuel} : Créez un environnement isolé pour éviter les conflits avec les packages installés globalement. Par exemple, exécutez :
+\end{itemize}
+
+\begin{lstlisting}
+python -m venv env
+env\Scripts\activate
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textbf{Installez les dépendances via \texttt{pyproject.toml}} : Une fois l'environnement activé, installez les modules requis à l'aide d'un gestionnaire de dépendances ou directement via pip.
+\end{itemize}
+
+\begin{lstlisting}
+pip install .
+\end{lstlisting}
+
+Cela garantit que tout utilisateur disposant du code et du fichier \texttt{pyproject.toml} peut reproduire l'environnement de développement.
 
 \section{Readme}
 
-% Expliquer l'importances du readme et le fait qu'il doit détailler une installation et une utilisation exhaustive du projet
+Le fichier \texttt{README.md} est la vitrine de votre projet. Il doit fournir aux utilisateurs et aux contributeurs toutes les informations nécessaires pour comprendre, installer et utiliser le projet. Respectez ces consignes.
 
 \section{Tests unitaires}
 
