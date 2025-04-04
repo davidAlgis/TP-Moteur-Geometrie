@@ -49,14 +49,7 @@ En Python, un \emph{module} est simplement un fichier contenant du code Python (
 Cette approche modulaire rend votre projet plus structuré et facilite les tests unitaires ainsi que la collaboration en équipe.
 \section{pyproject.toml}
 
-Utilisez le fichier \texttt{pyproject.toml} pour centraliser la configuration de vos outils. Configurez-le de la manière suivante :
-
-\begin{itemize}
-    \item \textbf{Gérez les dépendances} : Listez les packages requis et leurs versions pour éviter les conflits.
-    \item \textbf{Configurez les outils complémentaires} : Intégrez les configurations pour des outils comme\texttt{flake8} (linter) afin de standardiser votre code.
-\end{itemize}
-
-\textbf{Exemple de \texttt{pyproject.toml}} :
+Utilisez le fichier \texttt{pyproject.toml} pour centraliser la configuration de vos outils. Voici un exemple de \texttt{pyproject.toml} :
 
 \begin{lstlisting}
 [build-system]
@@ -111,17 +104,14 @@ Cela garantit que tout utilisateur disposant du code et du fichier \texttt{pypro
 
 \section{Readme}
 
-Le fichier \texttt{README.md} est la vitrine de votre projet. Il doit fournir aux utilisateurs et aux contributeurs toutes les informations nécessaires pour comprendre, installer et utiliser le projet. Respectez ces consignes.
+Le fichier \texttt{README.md} est la vitrine de votre projet. Il doit fournir aux utilisateurs et aux contributeurs toutes les informations nécessaires pour comprendre, installer et utiliser le projet. 
 
 \section{Tests unitaires}
 
-Intégrez des tests unitaires dès le début pour valider le fonctionnement de chaque composant de votre code. Suivez ces instructions :
+\textbf{On insistera jamais assez implémenter absolument des tests unitaires !} Chaque morceau de code doit être testé et validé par des tests unitaires. De préférence, je vous conseille même de programmer le test avant la fonctionnalité.
 
-\begin{itemize}
-    \item \textbf{Utilisez \texttt{pytest}} : Installez et configurez \texttt{pytest} pour lancer vos tests facilement.
-    \item \textbf{Structurez vos tests} : Placez-les dans un dossier \texttt{tests/} et nommez vos fichiers avec le préfixe \texttt{test\_}.
-    \item \textbf{Écrivez des tests pour chaque fonction critique} : Couvrez les cas normaux, les erreurs potentielles et les cas limites.
-\end{itemize}
+
+En pratique pour les tests, vous pouvez utiliser \texttt{pytest}, il suffit de placer vos tests dans un dossier \texttt{tests/} et nommez vos fichiers avec le préfixe \texttt{test\_}. 
 
 \textbf{Exemple de test avec \texttt{pytest}} :
 
@@ -138,8 +128,20 @@ def test_addition():
     assert addition(-1, 1) == 0
 \end{lstlisting}
 
-\textbf{Automatisez l'exécution} : Intégrez \texttt{pytest} dans votre pipeline d'intégration continue (CI) pour lancer les tests à chaque commit et garantir la stabilité du code.
+Ensuite pour lancer vos tests il suffit d'utiliser la commande \texttt{pytest}.
 
-En appliquant ces directives, vous assurerez la qualité et la robustesse de vos projets Python.
+\section{Ligne de vie du développement}
+
+Pour ce projet, je vous conseille de développer de la façon suivante :
+
+\begin{enumerate}
+  \item Formaliser au brouillon ce que l'on souhaite programmer
+  \item Ecrire un rapport en latex sur l'organisation de notre code et le pseudo code pour les différents algorithmes (vous pouvez utiliser les packages \texttt{algorithm} et \texttt{algpseudocode} pour rédiger du pseudo code)
+  \item Implémenter les tests 
+  \item Implémenter les fonctionnalités
+  \item S'assurer que les fonctionnalités vérifient les tests
+  \item Écrire ou générer la documentation associer à chaque fonctionnalité
+\end{enumerate}
+
 
 \end{document}
