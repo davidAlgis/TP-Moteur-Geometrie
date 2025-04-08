@@ -17,7 +17,7 @@
 \usepackage{extensionCours}
 
 \title{TP1 - Algèbre Linéaire et Plan Complexe}
-\author{David Algis}
+\author{}
 \date{\today}
 
 \begin{document}
@@ -29,13 +29,40 @@
 
 \sectionExercice{Algèbre Linéaire}
 
-Programmez les classes suivantes
 \begin{enumerate}
-    \item Une classe point ou vecteur 2D.
-    \item Une classe matrice $2\times2$.
+    \item Résolvez le système linéaire suivant :
+\[
+\begin{cases}
+2x + 2y = 4,\\[1mm]
+3x - 8y  = -1 
+\end{cases}
+\]
+    \item Dans \(\mathbb{R}^2\), considérez la base canonique \(\{e_1, e_2\}\) et une nouvelle base \(\{v_1, v_2\}\) définie par
+\[
+v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}, \quad
+v_2 = \begin{pmatrix} 1 \\ -1 \end{pmatrix}.
+\]
+Exprimez le vecteur 
+\[
+w = \begin{pmatrix} 2 \\ 3 \end{pmatrix}
+\]
+dans la nouvelle base.
+    \item Calculer le produit scalaire des vecteurs $v_1$ et $v_2$ définis ci-dessus.
+    \item Calculer le déterminant de la matrice:
+\[
+v_1 = 
+    \begin{pmatrix} 
+        1 & 2 \\ 
+        2 & 3 
+    \end{pmatrix}
+\]
+    \item Programmez les classes suivantes :
+    \begin{itemize}
+        \item Une classe point ou vecteur $\mathbb{R}^2$.
+        \item Une classe matrice $2\times2$.
+    \end{itemize}
+    Vos classes doivent « pouvoir résoudre » chaque question ci-dessus.
 \end{enumerate}
-
-Je vous invite à implémenter les opérations entre ces différents objets.
 
 \tipbox{Vous allez écrire les classes mathématiques de bases dont vous allez vous servir pendant tout le reste du semestre, donc assurez-vous d'avoir du code simple, robuste, efficace et pratique pour l'avenir !}
 
