@@ -74,6 +74,11 @@ exclude = ["tests/*"]
 dependencies = [
     "pygame>=2.0.0",
 ]
+
+[tool.setuptools]
+packages = ["NomModule1", "NomModule1"]
+# Optionnel : 
+package-dir = { "NomModule1" = "CheminModule1" }
 \end{lstlisting}
 
 En adoptant cette configuration, vous centralisez vos réglages et facilitez la collaboration sur votre projet.
