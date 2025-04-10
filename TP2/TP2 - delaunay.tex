@@ -14,6 +14,8 @@
 }
 
 \usepackage{../extensionCours}
+\usepackage{algorithm}       % Pour l'algorithme en pseudo-code
+\usepackage{algpseudocode}   % Pour l'algorithme en pseudo-code
 
 \newtheorem{theorem}{Théorème}[section]
 \theoremstyle{definition}
@@ -43,14 +45,13 @@ Soit \( \triangle ABC \) et une droite parallèle à la base \(BC\) qui coupe le
 \[
 \frac{AD}{DB} = \frac{AE}{EC}.
 \]
-\]
 \end{theorem}
 
 \begin{theorem}[Somme des angles]
 La somme des angles d’un triangle est égale à \(180^\circ\).
 \end{theorem}
 
-\begin{definition}[Rappel de droite particulière]
+\begin{definition}[Rappel de droites particulières]
 \begin{itemize}
   \item Une \textbf{médiane} relie un sommet au milieu du côté opposé.
   \item Une \textbf{hauteur} est un segment perpendiculaire à un côté issu du sommet opposé.
@@ -58,39 +59,102 @@ La somme des angles d’un triangle est égale à \(180^\circ\).
 \end{itemize}
 \end{definition}
 
-% TODO définition du cercle circonscrit.
-
+\begin{definition}[Cercle circonscrit]
+Le \textbf{cercle circonscrit} à un triangle est le cercle qui passe par l'ensemble des trois sommets du triangle. Son centre, appelé \textbf{circumcentre}, se trouve à l'intersection des médiatrices des côtés.
+\end{definition}
 
 \sectionExercice{Exercices Théoriques}
 
+Avant de formuler les questions, considérons la figure suivante :\\
+On étudie un triangle \(ABC\) pour lequel sont tracées plusieurs droites particulières (médiane, hauteur, et bissectrice). Dans le cadre de cet exercice, on souhaite déterminer certaines mesures comme des longueurs, des rapports de segments, ainsi que vérifier l’application des théorèmes de Thalès et de Pythagore.
 
-% TODO donner du contexte sur une figure et des mesure à déterminer
 \begin{enumerate}
-  % \item TODO construction à partir des droites décrites ci-dessus pour obtenir les conditions nécessaire à l'utilisation du théorème de Thalès pour la question suivante
-  % \item TODO faire une question avec Thalès 
-  % \item TODO faire une question avec Pythagore
+  \item \textbf{Construction préalable :} \\
+  Dans le triangle \(ABC\), tracez une droite passant par un point \(D\) situé sur \(AB\) et parallèle à \(BC\). Cette construction permet d’obtenir des triangles semblables, ce qui constitue la condition nécessaire à l’utilisation du théorème de Thalès.
+
+  \item \textbf{Application du théorème de Thalès :} \\
+  Dans le triangle \(ABC\), la droite parallèle à \(BC\) coupe \(AB\) en \(D\) et \(AC\) en \(E\). On vous donne :
+  \[
+  AD = 3\,\text{cm}, \quad DB = 2\,\text{cm} \quad \text{et} \quad AE = 4\,\text{cm}.
+  \]
+  Déduisez la longueur de \(EC\) en appliquant le théorème de Thalès.
+
+  \item \textbf{Application du théorème de Pythagore :} \\
+  Considérez un triangle rectangle \(ABC\) rectangle en \(C\). Étant donné que :
+  \[
+  AC = 5\,\text{cm} \quad \text{et} \quad BC = 12\,\text{cm},
+  \]
+  calculez la longueur de l’hypoténuse \(AB\) à l’aide du théorème de Pythagore.
 \end{enumerate}
 
 \sectionExercice{Implémentation d'une Classe \texttt{Triangle}}
 
 \begin{enumerate}
-  \item Créer une classe \texttt{Triangle}.
-  \item Utiliser cette classe pour vérifier vos résultats de l'énoncé ci-dessus.
+  \item Créez une classe \texttt{Triangle} qui stocke les coordonnées des sommets et permet de calculer, par exemple, les longueurs des côtés, le périmètre, et l’aire du triangle.
+  \item Utilisez cette classe pour vérifier vos résultats obtenus lors des exercices théoriques (par exemple, en implémentant une méthode qui vérifie la relation de Pythagore pour un triangle rectangle).
 \end{enumerate} 
 
 \sectionExercice{Triangulation de Delaunay}
 
-La triangulation de Delaunay d'un ensemble de points dans le plan consiste à diviser le plan en triangles tels que, pour chacun d'eux, le cercle circonscrit ne contient aucun autre point de l'ensemble. Ce procédé présente l'avantage de maximiser le plus petit angle parmi tous les triangles, ce qui permet d'éviter les triangles trop « allongés ».
+La triangulation de Delaunay d'un ensemble de points dans le plan consiste à diviser le plan en triangles tels que, pour chacun d'eux, le cercle circonscrit ne contient aucun autre point de l'ensemble. Ce procédé présente l'avantage de maximiser le plus petit angle parmi tous les triangles, ce qui permet d'éviter des triangles trop « allongés » et d'obtenir ainsi un maillage de meilleure qualité.
 
-% TODO expliquer les applications de la triangulation de Delaunay
+\subsection{Applications de la Triangulation de Delaunay}
 
-\subsection{Rappel Théorique}
+La triangulation de Delaunay est utilisée dans de nombreux domaines :
+\begin{itemize}
+  \item \textbf{Maillage numérique et analyse par éléments finis :} Pour générer des réseaux de maillage optimisés dans la modélisation de structures et la simulation physique.
+  \item \textbf{Systèmes d'information géographique (SIG) :} Pour l'interpolation de données spatiales et la reconstruction de surfaces (modèles de terrain).
+  \item \textbf{Vision par ordinateur :} Pour la reconstruction 3D à partir de nuages de points et la segmentation d'images.
+  \item \textbf{Robotique et navigation :} Pour optimiser les trajectoires et la détection d'obstacles dans un environnement donné.
+\end{itemize}
 
-% TODO expliquer comment construire la triangulation de Delaunay avec Bowyer-Watson, donner le pseudo code avec les packages
-% \usepackage{algorithm}
-% \usepackage{algpseudocode}
-% \algrenewcommand{\algorithmiccomment}[1]{\hfill \textcolor{greenF}{// #1}}
+\subsection{Rappel Théorique et Algorithme de Bowyer-Watson}
 
+Pour construire la triangulation de Delaunay, on utilise fréquemment l'algorithme de Bowyer-Watson qui procède de la manière suivante :
 
+\begin{enumerate}
+  \item \textbf{Création d'un super-triangle} \\
+  Définir un triangle suffisamment grand pour englober tous les points de l'ensemble.
+
+  \item \textbf{Insertion itérative des points} \\
+  Pour chaque point \(p\) de l'ensemble :
+  \begin{enumerate}
+    \item Identifier tous les triangles dont le cercle circonscrit contient \(p\).
+    \item Déterminer le bord de la cavité formée par ces triangles.
+    \item Supprimer ces triangles de la triangulation courante.
+    \item Pour chacune des arêtes du bord, créer un nouveau triangle en reliant cette arête à \(p\).
+  \end{enumerate}
+
+  \item \textbf{Nettoyage final} \\
+  Supprimer tous les triangles qui contiennent un sommet du super-triangle.
+\end{enumerate}
+
+Le pseudo-code suivant illustre cet algorithme :
+
+\begin{algorithm}
+\caption{Triangulation de Delaunay par Bowyer-Watson}
+\begin{algorithmic}[1]
+\State \textbf{Entrée :} Ensemble de points \(P\)
+\State \textbf{Sortie :} Triangulation de Delaunay de \(P\)
+\State Créer un super-triangle \(T_s\) englobant tous les points de \(P\)
+\State \(\mathcal{T} \gets \{T_s\}\)
+\For{chaque point \(p \in P\)}
+    \State \(\mathcal{T}_p \gets \{\}\)
+    \For{chaque triangle \(t \in \mathcal{T}\)}
+        \If{\(p\) est dans le cercle circonscrit de \(t\)}
+            \State Ajouter \(t\) à \(\mathcal{T}_p\)
+        \EndIf
+    \EndFor
+    \State Déterminer le bord de la cavité formée par les triangles de \(\mathcal{T}_p\)
+    \State Supprimer les triangles de \(\mathcal{T}_p\) de \(\mathcal{T}\)
+    \For{chaque arête \(e\) sur le bord}
+         \State Créer un nouveau triangle \(t'\) avec \(p\) et \(e\)
+         \State Ajouter \(t'\) à \(\mathcal{T}\)
+    \EndFor
+\EndFor
+\State Supprimer de \(\mathcal{T}\) les triangles contenant un sommet du super-triangle \(T_s\)
+\State \Return \(\mathcal{T}\)
+\end{algorithmic}
+\end{algorithm}
 
 \end{document}
