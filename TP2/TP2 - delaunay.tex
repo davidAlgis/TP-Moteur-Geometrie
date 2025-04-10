@@ -1,9 +1,9 @@
-% !TEX options=-synctex=1
+% !TEX options=-synctex=1 -output-directory=temp
 \documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
-\usepackage{amsmath,amssymb,amsthm} % Ajout du package amsthm pour les environnements de théorème
+\usepackage{amsmath,amssymb,amsthm} 
 \usepackage{xcolor}
 \usepackage{geometry}
 \geometry{
@@ -15,10 +15,7 @@
 
 \usepackage{../extensionCours}
 
-% Définition des environnements de théorème et de définition
 \newtheorem{theorem}{Théorème}[section]
-\newtheorem{lemma}[theorem]{Lemme}       % Optionnel, si besoin de l'employer
-\newtheorem{corollary}[theorem]{Corollaire} % Optionnel
 \theoremstyle{definition}
 \newtheorem{definition}{Définition}[section]
 
@@ -30,8 +27,8 @@
 
 \makeonlytitle
 
-\sectionExercice{Rappels de Géométrie Classique}
-
+\section{Rappels de Géométrie Classique}
+\label{sec:rappels_de_g_om_trie_classique}
 Avant de débuter, il est utile de rappeler quelques résultats fondamentaux de la géométrie :
 
 \begin{theorem}[Théorème de Pythagore]
@@ -61,109 +58,39 @@ La somme des angles d’un triangle est égale à \(180^\circ\).
 \end{itemize}
 \end{definition}
 
+% TODO définition du cercle circonscrit.
 
-\bigskip
 
-\sectionExercice{Exercices Théoriques - Niveau Collège}
+\sectionExercice{Exercices Théoriques}
+
+
+% TODO donner du contexte sur une figure et des mesure à déterminer
 \begin{enumerate}
-  \item \textbf{Calcul de l'hypoténuse :} Dans un triangle rectangle, si les deux côtés de l'angle droit mesurent respectivement 3 cm et 4 cm, calculez la longueur de l'hypoténuse.
-  \item \textbf{Somme des angles :} Vérifiez que dans un triangle dont les angles mesurent \(50^\circ\), \(60^\circ\) et \(70^\circ\), la somme des angles vaut bien \(180^\circ\).
-  \item \textbf{Application de Thalès :} Dans deux triangles semblables, démontrez par le théorème de Thalès que le rapport des longueurs des côtés correspondants est constant.
+  % \item TODO construction à partir des droites décrites ci-dessus pour obtenir les conditions nécessaire à l'utilisation du théorème de Thalès pour la question suivante
+  % \item TODO faire une question avec Thalès 
+  % \item TODO faire une question avec Pythagore
 \end{enumerate}
-
-\bigskip
 
 \sectionExercice{Implémentation d'une Classe \texttt{Triangle}}
 
-L'objectif de cette partie est de créer en Python une classe \texttt{Triangle} qui permettra de :
-\begin{itemize}
-  \item Représenter un triangle dans le plan à partir des coordonnées de ses trois sommets (exprimées sous la forme \((x,y)\)).
-  \item Calculer les longueurs de ses côtés.
-  \item Calculer son périmètre.
-  \item Calculer son aire en utilisant la formule de Héron.
-  \item Déterminer si le triangle est rectangle (en utilisant le théorème de Pythagore).
-\end{itemize}
-
-Voici un squelette de code pour vous aider à démarrer :
-
-\begin{verbatim}
-class Triangle:
-    def __init__(self, A, B, C):
-        """
-        Initialise un triangle avec trois sommets A, B, C.
-        Chaque sommet est un tuple (x, y).
-        """
-        self.A = A
-        self.B = B
-        self.C = C
-
-    def distance(self, P, Q):
-        """Calcule la distance euclidienne entre deux points P et Q."""
-        return ((P[0] - Q[0])**2 + (P[1] - Q[1])**2) ** 0.5
-
-    def side_lengths(self):
-        """Retourne les longueurs des côtés sous forme d'un tuple (a, b, c)
-        où :
-          - a est la longueur entre B et C,
-          - b entre A et C,
-          - c entre A et B.
-        """
-        a = self.distance(self.B, self.C)
-        b = self.distance(self.A, self.C)
-        c = self.distance(self.A, self.B)
-        return a, b, c
-
-    def perimeter(self):
-        """Calcule et retourne le périmètre du triangle."""
-        return sum(self.side_lengths())
-
-    def area(self):
-        """Calcule l'aire du triangle à l'aide de la formule de Héron."""
-        a, b, c = self.side_lengths()
-        s = (a + b + c) / 2
-        return (s * (s - a) * (s - b) * (s - c)) ** 0.5
-
-    def is_right_angle(self):
-        """Détermine si le triangle est rectangle.
-        Retourne True si le triangle est rectangle, False sinon.
-        """
-        a, b, c = sorted(self.side_lengths())
-        # On considère le triangle rectangle si a^2 + b^2 est proche de c^2
-        return abs(a**2 + b**2 - c**2) < 1e-6
-\end{verbatim}
-
-\tipbox{Veillez à bien tester votre classe avec plusieurs jeux de points afin d’en valider le comportement.}
-
-\bigskip
+\begin{enumerate}
+  \item Créer une classe \texttt{Triangle}.
+  \item Utiliser cette classe pour vérifier vos résultats de l'énoncé ci-dessus.
+\end{enumerate} 
 
 \sectionExercice{Triangulation de Delaunay}
 
 La triangulation de Delaunay d'un ensemble de points dans le plan consiste à diviser le plan en triangles tels que, pour chacun d'eux, le cercle circonscrit ne contient aucun autre point de l'ensemble. Ce procédé présente l'avantage de maximiser le plus petit angle parmi tous les triangles, ce qui permet d'éviter les triangles trop « allongés ».
 
+% TODO expliquer les applications de la triangulation de Delaunay
+
 \subsection{Rappel Théorique}
-\begin{itemize}
-  \item La triangulation de Delaunay est intimement liée à la structure de Voronoï ; les deux constructions sont duales.
-  \item L'algorithme de Bowyer-Watson est une méthode couramment utilisée pour construire la triangulation de Delaunay :
-    \begin{enumerate}
-      \item Créez un "super triangle" suffisamment grand pour contenir tous les points.
-      \item Ajoutez les points un à un en retirant les triangles dont le cercle circonscrit contient le point ajouté et en re-triangulant la zone vidée.
-      \item Une fois tous les points traités, retirez les triangles utilisant les sommets du super triangle.
-    \end{enumerate}
-\end{itemize}
 
-\subsection{Exercice Pratique}
-\begin{enumerate}
-  \item Implémentez l'algorithme de Bowyer-Watson pour réaliser la triangulation de Delaunay :
-    \begin{itemize}
-      \item Votre algorithme devra recevoir en entrée un ensemble de points \((x,y)\) définissant le domaine.
-      \item Créez un super triangle qui englobe tous ces points.
-      \item Traitez chaque point pour mettre à jour la triangulation en identifiant et supprimant les triangles dont le cercle circonscrit contient le point ajouté, puis re-triangulez la cavité ainsi obtenue.
-      \item Enfin, retirez tous les triangles qui font intervenir un sommet du super triangle.
-    \end{itemize}
-  \item Visualisez la triangulation obtenue en utilisant par exemple \texttt{matplotlib} pour afficher les arêtes des triangles.
-  \item (Optionnel) Intégrez dans votre algorithme l’utilisation de votre classe \texttt{Triangle} pour faciliter certains calculs (par exemple le calcul du cercle circonscrit).
-\end{enumerate}
+% TODO expliquer comment construire la triangulation de Delaunay avec Bowyer-Watson, donner le pseudo code avec les packages
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+% \algrenewcommand{\algorithmiccomment}[1]{\hfill \textcolor{greenF}{// #1}}
 
-\tipbox{Divisez votre code en fonctions modulaires et commentez chacune d’elles pour en expliquer le fonctionnement. Tester avec différents jeux de points est fortement conseillé pour vérifier la robustesse de votre implémentation.}
+
 
 \end{document}
