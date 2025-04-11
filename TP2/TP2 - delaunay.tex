@@ -29,69 +29,29 @@
 
 \makeonlytitle
 
-\section{Rappels de Géométrie Classique}
-\label{sec:rappels_de_g_om_trie_classique}
-Avant de débuter, il est utile de rappeler quelques résultats fondamentaux de la géométrie :
+\sectionExercice{Exercice Théorique}
+\label{exo:theorique}
 
-\begin{theorem}[Théorème de Pythagore]
-Soit \( \triangle ABC \) un triangle rectangle en \(C\). Alors, la relation suivante relie les longueurs des côtés :
-\[
-AB^2 = AC^2 + BC^2.
-\]
-\end{theorem}
+Soit les points: $A=\begin{pmatrix}0 & 0\end{pmatrix}$, $B=\begin{pmatrix}4 & 0\end{pmatrix}$, $C=\begin{pmatrix}2 & 2\end{pmatrix}$ dans la repère orthonormée :
 
-\begin{theorem}[Théorème de Thalès]
-Soit \( \triangle ABC \) et une droite parallèle à la base \(BC\) qui coupe les côtés \(AB\) et \(AC\) en \(D\) et \(E\) respectivement. Alors, on a :
-\[
-\frac{AD}{DB} = \frac{AE}{EC}.
-\]
-\end{theorem}
-
-\begin{theorem}[Somme des angles]
-La somme des angles d’un triangle est égale à \(180^\circ\).
-\end{theorem}
-
-\begin{definition}[Rappel de droites particulières]
-\begin{itemize}
-  \item Une \textbf{médiane} relie un sommet au milieu du côté opposé.
-  \item Une \textbf{hauteur} est un segment perpendiculaire à un côté issu du sommet opposé.
-  \item Une \textbf{bissectrice} divise un angle en deux angles de même mesure.
-\end{itemize}
-\end{definition}
-
-\begin{definition}[Cercle circonscrit]
-Le \textbf{cercle circonscrit} à un triangle est le cercle qui passe par l'ensemble des trois sommets du triangle. Son centre, appelé \textbf{circumcentre}, se trouve à l'intersection des médiatrices des côtés.
-\end{definition}
-
-\sectionExercice{Exercices Théoriques}
-
-Avant de formuler les questions, considérons la figure suivante :\\
-On étudie un triangle \(ABC\) pour lequel sont tracées plusieurs droites particulières (médiane, hauteur, et bissectrice). Dans le cadre de cet exercice, on souhaite déterminer certaines mesures comme des longueurs, des rapports de segments, ainsi que vérifier l’application des théorèmes de Thalès et de Pythagore.
+\begin{equation*}
+\left(\vec{e_1} = \begin{pmatrix}1 & 0\end{pmatrix}, \vec{e_2} = \begin{pmatrix}0 & 1\end{pmatrix}\right).
+\end{equation*}
 
 \begin{enumerate}
-  \item \textbf{Construction préalable :} \\
-  Dans le triangle \(ABC\), tracez une droite passant par un point \(D\) situé sur \(AB\) et parallèle à \(BC\). Cette construction permet d’obtenir des triangles semblables, ce qui constitue la condition nécessaire à l’utilisation du théorème de Thalès.
-
-  \item \textbf{Application du théorème de Thalès :} \\
-  Dans le triangle \(ABC\), la droite parallèle à \(BC\) coupe \(AB\) en \(D\) et \(AC\) en \(E\). On vous donne :
-  \[
-  AD = 3\,\text{cm}, \quad DB = 2\,\text{cm} \quad \text{et} \quad AE = 4\,\text{cm}.
-  \]
-  Déduisez la longueur de \(EC\) en appliquant le théorème de Thalès.
-
-  \item \textbf{Application du théorème de Pythagore :} \\
-  Considérez un triangle rectangle \(ABC\) rectangle en \(C\). Étant donné que :
-  \[
-  AC = 5\,\text{cm} \quad \text{et} \quad BC = 12\,\text{cm},
-  \]
-  calculez la longueur de l’hypoténuse \(AB\) à l’aide du théorème de Pythagore.
+  \item On définit le cercle $\mathcal{C}_1$ de diamètre le segment $[AB]$, montrer que le point $C$ appartient à $\mathcal{C}_1$, 
+  \item En utilisant le théorème de Pythagore montrer que le triangle $ABC$ est rectangle.
+  \item Soit $D$ le centre de $\mathcal{C}_1$, soit $\Delta$ la bissectrice de l'angle $\widehat{CDB}$, on note $E$ l'intersection entre $\mathcal{C}_1$ et $\Delta$. En déduire la longueur du segment $[DE]$. 
+  \item Soit $\mathcal{C}_2$ le cercle de centre $E$ et de rayon $[DE]$. Par définition $D$ est la première intersection entre $\mathcal{C}_2$ et $\Delta$, on note $F$ la seconde intersection entre $\mathcal{C}_2$ et $\Delta$. Donnez la longueur du segment $[DF]$.
+  \item On note $d$ la droite formée par les points $[BE]$, soit $d'$ la droite définie comme l'unique droite parallèle à $d$ et passant par le point $F$. On note $G$ l'intersection entre la droite $d'$ et l'axe engendré par $\vec{e_1}$. En utilisant le théorème de Thalès, déterminez les coordonnées du point $G$.
+  \item Représenter la figure obtenue à partir des différentes constructions ci-dessus. Vous pouvez utiliser le package \href{https://www.overleaf.com/learn/latex/TikZ_package}{TikZ} qui permet de générer des figures vectorisées dans le style du LaTex\footnote{Vous pouvez vous aider de l'éditeur en ligne \href{https://www.mathcha.io/}{Mathcha} est un éditeur WYSIWYG qui permet de directement visualiser et de générer du code TikZ.}.  
 \end{enumerate}
 
 \sectionExercice{Implémentation d'une Classe \texttt{Triangle}}
-
+\label{exo:triangle}
 \begin{enumerate}
-  \item Créez une classe \texttt{Triangle} qui stocke les coordonnées des sommets et permet de calculer, par exemple, les longueurs des côtés, le périmètre, et l’aire du triangle.
-  \item Utilisez cette classe pour vérifier vos résultats obtenus lors des exercices théoriques (par exemple, en implémentant une méthode qui vérifie la relation de Pythagore pour un triangle rectangle).
+  \item Créez une classe \texttt{Triangle} qui stocke les coordonnées des sommets et permet de calculer, par exemple, les longueurs des côtés, le périmètre et l’aire du triangle.
+  \item Utilisez cette classe pour vérifier vos résultats obtenus lors de l'exercice \ref{exo:theorique}.
 \end{enumerate} 
 
 \sectionExercice{Triangulation de Delaunay}
