@@ -50,71 +50,42 @@ Soit les points: $A=\begin{pmatrix}0 & 0\end{pmatrix}$, $B=\begin{pmatrix}4 & 0\
 \sectionExercice{Implémentation d'une Classe \texttt{Triangle}}
 \label{exo:triangle}
 \begin{enumerate}
-  \item Créez une classe \texttt{Triangle} qui stocke les coordonnées des sommets et permet de calculer, par exemple, les longueurs des côtés, le périmètre et l’aire du triangle.
+  \item Créez une classe \texttt{Triangle} qui stocke les coordonnées des sommets et permet de calculer, par exemple, les longueurs des côtés, le périmètre et l’aire du triangle. 
   \item Utilisez cette classe pour vérifier vos résultats obtenus lors de l'exercice \ref{exo:theorique}.
 \end{enumerate} 
 
+
+\tipbox{Pour l'aspect rendu vous pouvez utiliser les nouvelles fonctions de la classe \texttt{renderer.py}, notamment \texttt{draw_triangle}, \texttt{draw_segment} et \texttt{draw_circle}.}
+
 \sectionExercice{Triangulation de Delaunay}
 
-La triangulation de Delaunay d'un ensemble de points dans le plan consiste à diviser le plan en triangles tels que, pour chacun d'eux, le cercle circonscrit ne contient aucun autre point de l'ensemble. Ce procédé présente l'avantage de maximiser le plus petit angle parmi tous les triangles, ce qui permet d'éviter des triangles trop « allongés » et d'obtenir ainsi un maillage de meilleure qualité.
+La triangulation de Delaunay d'un ensemble de points dans le plan vise à diviser ce plan en triangles de telle sorte que pour chaque triangle, le cercle circonscrit ne contient aucun autre point de l'ensemble. Cette propriété a deux avantages majeurs : elle évite la formation de triangles très allongés et elle améliore la qualité du maillage pour des applications telles que la simulation physique, la reconstruction de surfaces ou la navigation robotique.
 
-\subsection{Applications de la Triangulation de Delaunay}
-
-La triangulation de Delaunay est utilisée dans de nombreux domaines :
-\begin{itemize}
-  \item \textbf{Maillage numérique et analyse par éléments finis :} Pour générer des réseaux de maillage optimisés dans la modélisation de structures et la simulation physique.
-  \item \textbf{Systèmes d'information géographique (SIG) :} Pour l'interpolation de données spatiales et la reconstruction de surfaces (modèles de terrain).
-  \item \textbf{Vision par ordinateur :} Pour la reconstruction 3D à partir de nuages de points et la segmentation d'images.
-  \item \textbf{Robotique et navigation :} Pour optimiser les trajectoires et la détection d'obstacles dans un environnement donné.
-\end{itemize}
-
-\subsection{Rappel Théorique et Algorithme de Bowyer-Watson}
-
-Pour construire la triangulation de Delaunay, on utilise fréquemment l'algorithme de Bowyer-Watson qui procède de la manière suivante :
-
-\begin{enumerate}
-  \item \textbf{Création d'un super-triangle} \\
-  Définir un triangle suffisamment grand pour englober tous les points de l'ensemble.
-
-  \item \textbf{Insertion itérative des points} \\
-  Pour chaque point \(p\) de l'ensemble :
-  \begin{enumerate}
-    \item Identifier tous les triangles dont le cercle circonscrit contient \(p\).
-    \item Déterminer le bord de la cavité formée par ces triangles.
-    \item Supprimer ces triangles de la triangulation courante.
-    \item Pour chacune des arêtes du bord, créer un nouveau triangle en reliant cette arête à \(p\).
-  \end{enumerate}
-
-  \item \textbf{Nettoyage final} \\
-  Supprimer tous les triangles qui contiennent un sommet du super-triangle.
-\end{enumerate}
-
-Le pseudo-code suivant illustre cet algorithme :
+Le pseudo-code ci-dessous résume l'algorithme :
 
 \begin{algorithm}
 \caption{Triangulation de Delaunay par Bowyer-Watson}
 \begin{algorithmic}[1]
 \State \textbf{Entrée :} Ensemble de points \(P\)
 \State \textbf{Sortie :} Triangulation de Delaunay de \(P\)
-\State Créer un super-triangle \(T_s\) englobant tous les points de \(P\)
-\State \(\mathcal{T} \gets \{T_s\}\)
+\State Créer un super-triangle \(T_s\) qui contient tous les points de \(P\)
+\State Initialiser la triangulation \(\mathcal{T} \gets \{T_s\}\)
 \For{chaque point \(p \in P\)}
-    \State \(\mathcal{T}_p \gets \{\}\)
-    \For{chaque triangle \(t \in \mathcal{T}\)}
-        \If{\(p\) est dans le cercle circonscrit de \(t\)}
-            \State Ajouter \(t\) à \(\mathcal{T}_p\)
-        \EndIf
-    \EndFor
-    \State Déterminer le bord de la cavité formée par les triangles de \(\mathcal{T}_p\)
-    \State Supprimer les triangles de \(\mathcal{T}_p\) de \(\mathcal{T}\)
-    \For{chaque arête \(e\) sur le bord}
-         \State Créer un nouveau triangle \(t'\) avec \(p\) et \(e\)
-         \State Ajouter \(t'\) à \(\mathcal{T}\)
+    \State \emph{Trouver l'ensemble} \(\mathcal{T}_p\) \emph{des triangles dont le cercle circonscrit contient \(p\)}
+    \State \emph{Déterminer le bord de la cavité} formée par \(\mathcal{T}_p\)
+    \State Supprimer tous les triangles de \(\mathcal{T}_p\) de \(\mathcal{T}\)
+    \For{chaque arête \(e\) du bord}
+         \State Créer un nouveau triangle \(t\) avec \(p\) et l'arête \(e\)
+         \State Ajouter \(t\) à \(\mathcal{T}\)
     \EndFor
 \EndFor
-\State Supprimer de \(\mathcal{T}\) les triangles contenant un sommet du super-triangle \(T_s\)
+\State Supprimer de \(\mathcal{T}\) tous les triangles contenant un sommet de \(T_s\)
 \State \Return \(\mathcal{T}\)
 \end{algorithmic}
 \end{algorithm}
+
+\begin{enumerate}
+  \item Implémentez la triangulation de Delaunay d'un ensemble de points aléatoires.
+\end{enumerate}
 
 \end{document}
