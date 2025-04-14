@@ -27,7 +27,7 @@
 \sectionExercice{Théorie - Un bug dans Unity}
 \label{exo:theorique}
 
-Vous êtes développeur d'un jeu sous Unity. Malheureusement, comme à son habitude le logiciel est défectueux est l'éditeur ne fonctionne plus du tout\footnote{Si vous pensez que ce scénario est rocambolesque, je vous invite à considérer la version plus probable où vous ne souhaitez pas utiliser l'éditeur, car tous les \textit{gameobjects} sont instanciés dynamiquement à l'initialisation.}, de même que les fonctions qui permettent de définir la position et l'orientation manuellement.  
+Vous êtes développeur d'un jeu sous Unity. Malheureusement, comme à son habitude le logiciel est défectueux est l'éditeur ne fonctionne plus du tout\footnote{Si vous pensez que ce scénario est rocambolesque, je vous invite à considérer la version plus probable où vous ne souhaitez pas utiliser l'éditeur, car dans votre projet tous les \textit{gameobjects} doivent être instanciés dynamiquement à l'initialisation.}, de même que les fonctions qui permettent de définir la position et l'orientation manuellement.  
 
 \begin{enumerate}
   \item Soit un personnage modélisé par un sprite, l'utilisateur souhaite le déplacer à la position $\begin{pmatrix} 1 & 2\end{pmatrix}$, donner la matrice de changement de coordonnée à appliquer au personnage pour lui donner sa nouvelle position.
@@ -43,12 +43,12 @@ Vous êtes développeur d'un jeu sous Unity. Malheureusement, comme à son habit
 
 \begin{enumerate}
   \item Implémenter une classe vecteur et matrice adaptées pour les coordonnées homogènes.
-  \item Implémenter les similitudes et des fonctions les manipuler.
+  \item Implémenter les similitudes et des fonctions pour les manipuler.
 \end{enumerate}
 
-\sectionExercice{Chute des corps}
+\sectionExercice{Orbite}
 
-Soit $\mathcal{C}$ un cercle de rayon $r$ et de centre $M$ situé à une distance de $d$ de l'origine du monde. Soit $\mathcal{C_1}$ et $\mathcal{C_2}$ deux cercles de rayon $r_1$ et $r_2$ et placé à une distance $d_1$ et $d_2$ de $\mathcal{C}$. Ces deux cercles orbitent autour de $\mathcal{C}$ avec respectivement, une période de $t_1$ et $t_2$.
+Soit $\mathcal{C}$ un cercle de rayon $r$ et de centre $M$ situé à une distance de $d$ de l'origine du monde. Soit $\mathcal{C}_1$ et $\mathcal{C}_2$ deux cercles de rayon $r_1$ et $r_2$ et placé à une distance $d_1$ et $d_2$ de $\mathcal{C}$. Ces deux cercles orbitent autour de $\mathcal{C}$ avec respectivement, une période de $t_1$ et $t_2$.
 En utilisant les implémentations de l'exercice \ref{exo:impl}, simulez l'évolution de la trajectoire de ces trois cercles.
 
 \end{document}
