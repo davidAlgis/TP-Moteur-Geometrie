@@ -1,0 +1,54 @@
+% !TEX options=-synctex=1 -output-directory=temp
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,amsthm} 
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\usepackage{../extensionCours}
+
+\title{TP 3 - Similitudes}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\makeonlytitle
+
+
+\sectionExercice{Théorie - Un bug dans Unity}
+\label{exo:theorique}
+
+Vous êtes développeur d'un jeu sous Unity. Malheureusement, comme à son habitude le logiciel est défectueux est l'éditeur ne fonctionne plus du tout\footnote{Si vous pensez que ce scénario est rocambolesque, je vous invite à considérer la version plus probable où vous ne souhaitez pas utiliser l'éditeur, car tous les \textit{gameobjects} sont instanciés dynamiquement à l'initialisation.}, de même que les fonctions qui permettent de définir la position et l'orientation manuellement.  
+
+\begin{enumerate}
+  \item Soit un personnage modélisé par un sprite, l'utilisateur souhaite le déplacer à la position $\begin{pmatrix} 1 & 2\end{pmatrix}$, donner la matrice de changement de coordonnée à appliquer au personnage pour lui donner sa nouvelle position.
+  \item L'utilisateur souhaite également faire tourner le personnage de \(\frac{\pi}{4}\) dans le sens trigonométrique autour de l'origine. Donnez la matrice de rotation correspondante en coordonnées homogènes.
+  \item On souhaite doubler la taille du personnage. Donnez la matrice d'homothétie correspondante.
+  \item Considérez l'épée, qui doit être placée dans le repère local du personnage à la position $\begin{pmatrix} 0.5 & -0.5 \end{pmatrix}$. De plus l'épée est tournée de $\pi$ par rapport au personnage. Définissez la matrice de transformation locale à appliquer à l'épée par rapport au repère du personnage.
+  \item Donner les coordonnées mondes de l'épée.
+\end{enumerate}
+
+\sectionExercice{Implémentation des similitudes}
+\label{exo:impl}
+
+
+\begin{enumerate}
+  \item Implémenter une classe vecteur et matrice adaptées pour les coordonnées homogènes.
+  \item Implémenter les similitudes et des fonctions les manipuler.
+\end{enumerate}
+
+\sectionExercice{Chute des corps}
+
+Soit $\mathcal{C}$ un cercle de rayon $r$ et de centre $M$ situé à une distance de $d$ de l'origine du monde. Soit $\mathcal{C_1}$ et $\mathcal{C_2}$ deux cercles de rayon $r_1$ et $r_2$ et placé à une distance $d_1$ et $d_2$ de $\mathcal{C}$. Ces deux cercles orbitent autour de $\mathcal{C}$ avec respectivement, une période de $t_1$ et $t_2$.
+En utilisant les implémentations de l'exercice \ref{exo:impl}, simulez l'évolution de la trajectoire de ces trois cercles.
+
+\end{document}
