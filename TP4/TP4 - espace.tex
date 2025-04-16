@@ -61,15 +61,16 @@ Dans la suite, on va essayer de reproduire une version simplifié du fonctionnem
 
 \begin{enumerate}
   \item Implémenter une classe vecteur et matrice adaptées pour la géométrie dans l'espace et les coordonnées homogènes.
+  \item Implémenter une façon de calculer les coordonnées barycentrique d'un point pour un triangle donné. 
   \item Implémenter une classe \texttt{gameobject} qui vous servira de réceptacle pour toutes les informations d'un objet dans votre jeu.
   \item Implémenter une classe \texttt{transform} qui contiendra les informations de géométries de votre \texttt{gameobject}.
   \item Implémenter une classe \texttt{renderer} qui contiendra les informations de rendu de votre \texttt{gameobject}.
-  \item Ajouter un cube et une sphère à votre programme.
+  \item Implémenter un pipeline de rendu simplifié comme vu en cours pour afficher un cube.
 \end{enumerate}
 
 \sectionExercice{Chute des corps}
 
-Maintenant que nous avons les briques de notre moteur, nous souhaitons construire une simulation physique d'une balle. 
+Maintenant que nous avons les briques de notre moteur, nous souhaitons construire une simulation physique d'une cube. 
 L'idée est d'utiliser les équations de Newton pour modéliser le mouvement d'un objet sous l'effet de la gravité ou d'autres forces, puis d'approximer numériquement ces équations à l'aide d'un schéma d'intégration explicite, en particulier la méthode d'Euler. Considérons la deuxième loi de Newton : 
 
 \begin{equation}
@@ -92,16 +93,16 @@ pour un $h$ suffisamment petit. Ici on va faire évoluer notre simulation par in
 v(t+\Delta t) &= v(t) + \frac{\Delta t}{m}(\sum F)
 \end{align}
 
-Ce qui nous permet de déterminer directement la vitesse au temps $t+\Delta t$ à partir de la vitesse au temps $t$ et des forces $F$ appliquées sur l'objet. 
+Ce qui nous permet de déterminer directement la vitesse au temps $t+\Delta t$ quand on la possède au temps $t$. 
 
 
 \begin{enumerate}
     \item En utilisant le même raisonnement que la vitesse ci-dessus, déterminer une expression de la nouvelle position $p(t+\Delta t)$ en fonction de la nouvelle vitesse $v(t+\Delta t)$ et de l'ancienne position $p(t)$.  
     \item Implémenter des fonctions pour mettre à jour la physique pendant votre simulation.
-    \item Ajouter une sphère $h$ mètres au dessus du sol, appliquer la gravité sur celle-ci. Dans un premier temps, on considère qu'aucune réponse de collision n'est appliqué et que la sphère est juste stoppée quand son centre atteint le niveau $0$ de la verticale. 
-    \item En théorie une sphère nécessite $\sqrt{\frac{2h}{g}}$ secondes, quant est-il dans votre simulation ? que pouvez vous en déduire ?
-    \item Maintenant, on souhaite simuler une approximation « naïve » de réponse de collision. Pour ça, on suppose que la collision absorbe la moitié de la vitesse de la balle et que celle-ci est renvoyé dans la direction opposée à son impact. Appliquer ce principe à votre sphère qui chute.
-    \item Simuler la trajectoire d'une balle de tennis propulsé avec une force de $f$ newton vers l'avant et $g$ vers le haut.
+    \item Ajouter un cube $h$ mètres au dessus du sol, appliquer la gravité sur celle-ci. Dans un premier temps, on considère qu'aucune réponse de collision n'est appliqué et que le cube est juste stoppée quand son centre atteint le niveau $0$ de la verticale. 
+    \item En théorie un cube nécessite $\sqrt{\frac{2h}{g}}$ secondes, quant est-il dans votre simulation ? que pouvez vous en déduire ?
+    \item Maintenant, on souhaite simuler une approximation « naïve » de réponse de collision. Pour ça, on suppose que la collision absorbe la moitié de la vitesse de la cube et que celle-ci est renvoyé dans la direction opposée à son impact. Appliquer ce principe à votre cube qui chute.
+    \item Simuler la trajectoire d'une balle cubique de tennis propulsé avec une force de $f$ newton vers l'avant et $g$ vers le haut.
 \end{enumerate}
 
 \end{document}
