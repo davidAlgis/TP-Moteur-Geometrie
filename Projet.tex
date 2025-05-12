@@ -65,15 +65,16 @@ authors = [
     { name = "Mon Magnifique Nom", email = "ma-super@addresse.fr" }
 ]
 
+
+# Dependances externes autorisees dans le projet.
+dependencies = [
+    "pygame>=2.0.0",
+]
+
 [tool.flake8]
 max-line-length = 79
 exclude = ["tests/*"]
 
-# Dependances externes autorisees dans le projet.
-[tool.project]
-dependencies = [
-    "pygame>=2.0.0",
-]
 
 [tool.setuptools]
 packages = ["NomModule1", "NomModule1"]
