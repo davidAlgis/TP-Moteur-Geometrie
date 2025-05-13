@@ -27,10 +27,10 @@
 \sectionExercice{Théorie - Un bug dans Unity}
 \label{exo:theorique}
 
-Vous êtes développeur d'un jeu sous Unity. Malheureusement, comme à son habitude le logiciel est défectueux est l'éditeur ne fonctionne plus du tout\footnote{Si vous pensez que ce scénario est rocambolesque, je vous invite à considérer la version plus probable où vous ne souhaitez pas utiliser l'éditeur, car dans votre projet tous les \textit{gameobjects} doivent être instanciés dynamiquement à l'initialisation.}, de même que les fonctions qui permettent de définir la position et l'orientation manuellement.  
+Vous êtes développeur d'un jeu sous Unity. Malheureusement, comme à son habitude le logiciel est défectueux et l'éditeur ne fonctionne plus du tout\footnote{Si vous pensez que ce scénario est rocambolesque, je vous invite à considérer la version plus probable où vous ne souhaitez pas utiliser l'éditeur, car dans votre projet tous les \textit{gameobjects} doivent être instanciés dynamiquement à l'initialisation.}, de même que les fonctions qui permettent de définir la position et l'orientation manuellement.  
 
 \begin{enumerate}
-  \item Soit un personnage modélisé par un sprite, l'utilisateur souhaite le déplacer à la position $\begin{pmatrix} 1 & 2\end{pmatrix}$, donner la matrice de changement de coordonnée à appliquer au personnage pour lui donner sa nouvelle position.
+  \item Soit un personnage modélisé par un sprite instancié à l'origine du moteur, l'utilisateur souhaite le déplacer à la position $\begin{pmatrix} 1 & 2\end{pmatrix}$, donner la matrice de changement de coordonnée à appliquer au personnage pour lui donner sa nouvelle position.
   \item L'utilisateur souhaite également faire tourner le personnage de \(\frac{\pi}{4}\) dans le sens trigonométrique autour de l'origine. Donnez la matrice de rotation correspondante en coordonnées homogènes.
   \item On souhaite doubler la taille du personnage. Donnez la matrice d'homothétie correspondante.
   \item Considérez l'épée, qui doit être placée dans le repère local du personnage à la position $\begin{pmatrix} 0.5 & -0.5 \end{pmatrix}$. De plus l'épée est tournée de $\pi$ par rapport au personnage. Définissez la matrice de transformation locale à appliquer à l'épée par rapport au repère du personnage.
