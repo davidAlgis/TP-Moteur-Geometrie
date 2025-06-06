@@ -1,0 +1,87 @@
+% !TEX options=-synctex=1 -output-directory=temp
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,amsthm} 
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\usepackage{../extensionCours}
+
+\title{TP 5 - Introduction aux quaternions}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\makeonlytitle
+
+
+\sectionExercice{Algèbre des quaternions}
+\label{exo:theorique}
+
+\begin{enumerate}
+	\item Soit \( q = 1 + 2i + 3j + 4k \).
+	      \begin{enumerate}
+		      \item Calculez la norme \( \lVert q \rVert \).
+		      \item Déterminez le conjugué \( \overline{q} \).
+		      \item Vérifiez que \( q \overline{q} = \lVert q \rVert^2 \).
+		      \item En déduire l'inverse \( q^{-1} \).
+	      \end{enumerate}
+	\item Soit \( q_1 = 1 + i + j \) et \( q_2 = 1 - j + k \).
+	      \begin{enumerate}
+		      \item Calculez \( q_1 q_2 \) et \( q_2 q_1 \).
+		      \item Vérifiez que la multiplication des quaternions n’est pas commutative.
+	      \end{enumerate}
+\end{enumerate}
+
+
+\sectionExercice{Modification d'angle}
+
+On souhaite effectuer une rotation de $135^\circ$ autour de l’axe $z$. On considère un vecteur initial $\mathbf{p} = (1, 0, 0)$.
+
+\begin{enumerate}
+	\item \textbf{Approche par angles d’Euler}
+
+	      On encode cette rotation par les angles d’Euler $(\phi, \theta, \psi) = (0^\circ, 0^\circ, 135^\circ)$ selon l’ordre $ZYX$.
+	      \begin{enumerate}
+		      \item Écrivez les matrices élémentaires $R_x(\phi)$, $R_y(\theta)$ et $R_z(\psi)$.
+		      \item Calculez la matrice de rotation totale $R = R_z R_y R_x$.
+		      \item Appliquez cette matrice au vecteur $\mathbf{p}$ pour obtenir $\mathbf{p}_1 = R \mathbf{p}$.
+	      \end{enumerate}
+
+	\item \textbf{Approche par quaternion}
+	      \begin{enumerate}
+		      \item Construisez le quaternion unitaire $q = \left[\cos\left(\frac{135^\circ}{2}\right), \sin\left(\frac{135^\circ}{2}\right)\,\mathbf{k}\right]$.
+		      \item Écrivez le vecteur initial comme un quaternion pur $p = [0,\,\mathbf{p}]$.
+		      \item Calculez $p' = q p q^{-1}$.
+		      \item Identifiez la partie vectorielle de $p'$.
+	      \end{enumerate}
+
+	\item \textbf{Comparaison}
+	      \begin{enumerate}
+		      \item Comparez les résultats $\mathbf{p}_1$ et $\mathbf{p}'$. Sont-ils identiques ?
+		      \item Commentez les avantages de l’approche quaternion par rapport à l’approche Euler dans ce cas particulier.
+	      \end{enumerate}
+\end{enumerate}
+
+
+\sectionExercice{Implémentation Quaternion}
+\label{exo:impl}
+
+\begin{enumerate}
+	\item Implémenter une classe quaternion.
+	\item Implémenter des fonctions pour manipuler vos objects avec des quaternions.
+	\item Faites tourner un cube avec vos fonctions de quaternions.
+	\item Afficher un avion dans votre moteur (un avion d'informaticien donc 3 cubes devrait suffire).
+\end{enumerate}
+
+
+\end{document}

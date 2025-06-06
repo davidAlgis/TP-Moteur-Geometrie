@@ -1,0 +1,69 @@
+% !TEX options=-synctex=1 -output-directory=temp
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsmath,amssymb,amsthm} 
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  total={170mm,257mm},
+  left=20mm,
+  top=20mm,
+}
+
+\usepackage{../extensionCours}
+
+\title{TP 5 - Introduction aux quaternions}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\makeonlytitle
+
+
+\sectionExercice{Référentiel local vs global}
+
+Soit un vecteur \( \mathbf{p} = (1, 0, 0) \). On considère deux rotations successives :
+\begin{itemize}
+  \item une rotation \( \theta = 90^\circ \) autour de \( \mathbf{z} \) dans le repère \textbf{global},
+  \item suivie d’une rotation \( \alpha = 90^\circ \) autour de \( \mathbf{y} \) dans le repère \textbf{local} (lié au vecteur déjà tourné).
+\end{itemize}
+
+\begin{enumerate}
+          \item Construisez les quaternions \( q_1 \) (rotation autour de \( \mathbf{z} \)) et \( q_2 \) (rotation locale autour de \( \mathbf{y} \)).
+          \item Donnez le quaternion global \( q_{\text{final}} \) à appliquer sur \( \mathbf{p} \), en respectant l’ordre des référentiels.
+          \item Calculez \( p' = q_{\text{final}}\,p\,q_{\text{final}}^{-1} \).
+          \item Donnez les coordonnées finales du vecteur tourné.
+          \item Que se passe-t-il si les deux rotations sont appliquées dans le même repère (global ou local uniquement) ?
+          \item Que remarque-t-on si l’on inverse l’ordre de multiplication \( q_1 \cdot q_2 \) au lieu de \( q_2 \cdot q_1 \) ?
+\end{enumerate}
+
+\sectionExercice{Blocage de cardan}
+\label{exo:impl}
+
+\begin{enumerate}
+	\item Après avoir positionner deux avions dans votre scène faites une rotation autour de l'axe $z$ (le roulis) avec :
+    \begin{enumerate}
+        \item les angles d'Eulers.
+        \item vos nouvelles fonctions de rotation utilisant les quaternions.        
+    \end{enumerate}
+    \item Que constatez-vous ? interprétez.
+\end{enumerate}
+
+
+\sectionExercice{Interpolation}
+
+\begin{enumerate}
+    \item Implementer le LERP et le SLERP
+    \item Après avoir positionner deux avions dans votre scène faites une interpolation de $(0,0,0)$ vers $(0,270,0)$ avec :
+    \begin{enumerate}
+        \item LERP sur les angles d'Eulers.
+        \item SLERP sur les quaternions.        
+    \end{enumerate}
+    \item Que constatez-vous ? interprétez.
+\end{enumerate}
+
+\end{document}
