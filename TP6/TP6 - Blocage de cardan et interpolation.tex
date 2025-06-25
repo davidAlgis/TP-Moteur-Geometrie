@@ -66,4 +66,84 @@ Soit un vecteur \( \mathbf{p} = (1, 0, 0) \). On considère deux rotations succe
     \item Que constatez-vous ? interprétez.
 \end{enumerate}
 
+
+
+\sectionExercice{Chute des corps (bonus)}
+
+Maintenant que nous avons les briques de notre moteur, nous souhaitons construire une simulation physique d'un cube. 
+L'idée est d'utiliser les équations de Newton pour modéliser le mouvement d'un objet sous l'effet de la gravité ou d'autres forces, puis d'approximer numériquement ces équations à l'aide d'un schéma d'intégration explicite, en particulier la méthode d'Euler. Considérons la deuxième loi de Newton : 
+
+\begin{equation}
+    \label{equa:newton}
+    \sum F = m\vec{a},
+\end{equation}
+
+Celle-ci nous donne directement une expression de l'accélération $a$ en fonction de la masse de l'objet $m$ et des forces appliquées sur celui-ci $F$. Or, on sait que l'accélération est la dérivée de la vitesse, on a donc l'égalité suivante $a = \frac{dv}{dt}$. De plus, on sait depuis le cours sur les développements limités que :
+
+\begin{equation}
+    \label{equa:dl}
+    \frac{dv}{dt} \simeq \frac{v(t+\Delta t)-v(t)}{\Delta t}
+\end{equation}
+
+pour un $\Delta t$ suffisamment petit. En combinant les équations \eqref{equa:newton} et \eqref{equa:dl} on obtient :
+
+\begin{align}
+\sum F &= m \frac{dv}{dt} \\
+\sum F &= m \frac{v(t+\Delta t)-v(t)}{\Delta t} \\
+v(t+\Delta t) &= v(t) + \frac{\Delta t}{m}\bigl(\sum F\bigr)
+\end{align}
+
+Ce qui nous permet de déterminer directement la vitesse au temps $t+\Delta t$ quand on la possède au temps $t$.
+
+\subsection*{Prise en compte de la rotation du cube}
+
+Le cube est un corps rigide : sa position est décrite par un vecteur de translation $\mathbf{p}(t)$ et son orientation par un quaternion unitaire $\mathbf{q}(t)$. Sa vitesse est noté $\mathbf{v}(t)$ et sa vitesse angulaire $\mathbf{\omega}(t)$.   
+Pour intégrer la rotation, on part du moment résultant $\boldsymbol{\tau}\in\mathbb{R^3}$ (plus communément appelé \emph{torque} en anglais) appliqué au cube et de sa matrice d'inertie $I\in M_{3\times3}$ exprimée dans l'espace local. La matrice d'inertie d'un cube de masse $m$ et de longueur $l$ est donnée par $I = \frac{ml^2}{6}Id$.
+
+L'algorithme de mise à jour est le suivant :
+
+\begin{enumerate}
+  \item Calculer l'accélération angulaire (locale) :
+        \[
+            \boldsymbol{\alpha}(t)
+            = I^{-1}
+              \Bigl(\boldsymbol{\tau}(t)
+              - \boldsymbol{\omega}(t)\times \bigl(I\,\boldsymbol{\omega}(t)\bigr)\Bigr).
+        \]
+  \item Mettre à jour la vitesse angulaire :
+        \[
+            \boldsymbol{\omega}(t+\Delta t)
+            = \boldsymbol{\omega}(t) + \Delta t\,\boldsymbol{\alpha}(t).
+        \]
+  \item Mettre à jour le quaternion d'orientation par intégration d'Euler explicite :
+        \[
+            \dot{\mathbf{q}}(t)
+            = \tfrac12\,
+              \bigl(0,\boldsymbol{\omega}(t)\bigr)\,\mathbf{q}(t),\qquad
+            \mathbf{q}(t+\Delta t)
+            = \mathbf{q}(t) + \Delta t\,\dot{\mathbf{q}}(t).
+        \]
+  \item Re-normaliser $\mathbf{q}(t+\Delta t)$ pour éviter la dérive numérique :
+        \[
+            \mathbf{q}(t+\Delta t) \;\leftarrow\;
+            \frac{\mathbf{q}(t+\Delta t)}{\lVert\mathbf{q}(t+\Delta t)\rVert}.
+        \]
+\end{enumerate}
+
+\textbf{Remarque :} Dans un moteur physique temps-réel, on utilisera souvent une matrice d'inertie (ou son inverse) pré-calculée dans l'espace local, puis transformée dans le repère monde à chaque pas de simulation si nécessaire.
+
+\begin{enumerate}
+    \item En utilisant le même raisonnement que pour la vitesse ci-dessus, déterminer une expression de la nouvelle position $p(t+\Delta t)$ en fonction de la nouvelle vitesse $v(t+\Delta t)$ et de l'ancienne position $p(t)$.  
+    \item Implémenter des fonctions pour mettre à jour la physique pendant votre simulation.
+    \item Ajouter un cube $h$ mètres au dessus du sol, appliquer la gravité sur celui-ci. Dans un premier temps, on considère qu'aucune réponse de collision n'est appliquée et que le cube est juste stoppé quand son centre atteint le niveau $0$ de la verticale. 
+    \item En théorie un cube nécessite $\sqrt{\tfrac{2h}{g}}$ secondes pour atteindre le sol ; qu'en est-il dans votre simulation ? Que pouvez-vous en déduire ?
+    \item Maintenant, on souhaite simuler une approximation \og naïve \fg{} de réponse de collision. Pour cela, on suppose que la collision absorbe la moitié de la vitesse du cube et que celle-ci est renvoyée dans la direction opposée à son impact. Appliquer ce principe à votre cube qui chute.
+    \item Simuler la trajectoire d'une balle cubique de tennis propulsée avec une force de $f$ newtons vers l'avant et $g$ vers le haut.
+    \item Implémentez la mise à jour de l'orientation dans votre code.
+    \item Tester en appliquant un moment résultat sur la verticale du cube. 
+    \item Faites des simulations avec des cubes de différentes masses et de différentes longueur. 
+\end{enumerate}
+
+
+
 \end{document}
